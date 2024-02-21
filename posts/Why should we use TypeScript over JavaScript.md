@@ -26,7 +26,28 @@ I've seen a lot of JS codebases and they all tend to get messy. They often lack 
 
 #### Typed code is a lot more readable. It's much more obvious what happens if you're always aware of the shape and flow of data within your code.
 
-The most valuable benefit of a high quality codebase is that it speeds you up 10x all while reducing frustration to a minimum. If you have a codebase that reads like a book, you can easily keep a mental representation of the entire codebase. Bugs tend to become a lot more obvious and most of the times you immediately know where and how you need to fix them. This makes things much more predictable and enables the team to better estimate the effort needed in order to fix a bug. This takes risk out of a project and increases plannability allowing your PO to better align the roadmap with the teams estimation.
+The most valuable benefit of a high quality codebase is that it speeds you up 10x<sup>*</sup> all while reducing frustration to a minimum. If you have a codebase that reads like a book, you can easily keep a mental representation of the entire codebase. Bugs tend to become a lot more obvious and most of the times you immediately know where and how you need to fix them. This makes things much more predictable and enables the team to better estimate the effort needed in order to fix a bug. This takes risk out of a project and increases plannability allowing your PO to better align the roadmap with the teams estimation.
+
+
+<sub>* When compared to a huge and messy codebase. Features that can be delivered within a day might take up multiple weeks if your code is messy. Bugs that are fixable within minutes in a clean and structured codebase may take weeks of debugging and frustration.</sub>
+
+Scalability of your codebase becomes a huge issue when it's not structured and clean and will only slow you down even more as it grows.
+
+### Speed
+A proper IDE with TypeScript support helps you to speed up your coding by an order of magnitude. Here are a few examples of how to speed up your coding stay in the flow.  
+
+*Note: VS Code offers pretty good support for .js files, personally however I feel like IDE support is much better for TypeScript than it is for JavaScript*
+
+* **Shortcuts** 
+Use Ctrl + Space for autocompletion of variables. This saves you a second for every variable or function you type. 
+* **Auto Imports**  
+Instead of taking you out of the typing flow, auto imports allow you to leave your cursor at the same position saving you a whole lot of time for each import you have to do. You don't have to scroll to the top, you don't have to write the import manually and you don't have to scroll back down and find the place where you left. It's just much more seamless if you press Ctrl + Space for Auto Imports. 
+Just hit enter and continue typing.
+* **Multicursor**
+If you have to edit the same part of text or repeat the same action for multiple lines of text you can use two shortcuts. Ctrl + Shift + Down to create another cursor a line below. (image adding the same character infront of every line). Instead of repeating this manually for every line you can simply create multiple cursors. You can also press Ctrl + D to select the next instance of the highlighted part with another cursor. This allows you to edit all occurences of some text at the same time, simply by highlighting something and keeping Ctrl + D pressed for a while.
+* **Refactoring**
+Want to rename a variable? Press F2. Don't do a search and replace or edit it manually, that's error prone. You might accidentally rename a variable with the same name in a different scope, or miss a few variables when doing it by hand. 
+The rename functionality of your IDE makes sure all **references** of that variable are renamed. 
 
 Here are a few additional aspects to consider in terms of code quality besides using a typed language:
 
@@ -66,15 +87,68 @@ Here are a few additional aspects to consider in terms of code quality besides u
 
 ### Mitigate common pitfalls
 
-Using some of these techniques allows you to mitigate a lot of problems which make JavaScript especially difficult for beginners.
+Using some of these techniques allows you to mitigate a lot of problems which make JavaScript difficult, especially for beginners.
 
 #### ASI
 
 Using ESLint you can mitigate common pitfalls with ASI by enabling the [@stylistic/semi](https://eslint.style/rules/default/semi)
 
-#### Weak comparison
+> However, the ASI mechanism can sometimes be tricky to people who are using semicolons. For example, consider this code:
+>
+> ```tsx
+> return;
+> {
+>   name: "ESLint";
+> }
+> ```
+>
+> This may look like a `return` statement that returns an object literal, however, the JavaScript engine will interpret this code as:
+>
+> ```tsx
+> return;
+> {
+>   name: "ESLint";
+> }
+> ```
+>
+> Effectively, a semicolon is inserted after the return statement, causing the code below it (a labeled literal inside a block) to be unreachable. This rule and the no-unreachable rule will protect your code from such cases.
+>
+> On the other side of the argument are those who say that since semicolons are inserted automatically, they are optional and do not need to be inserted manually. However, the ASI mechanism can also be tricky to people who don't use semicolons. For example, consider this code:
+>
+> ```tsx
+> var globalCounter = {}(function () {
+>   var n = 0;
+>   globalCounter.increment = function () {
+>     return ++n;
+>   };
+> })();
+> ```
+>
+> In this example, a semicolon will not be inserted after the first line, causing a run-time error (because an empty object is called as if it's a function). The no-unexpected-multiline rule can protect your code from such cases.
 
-A lot of novice JavaScript developers are confused by `===` vs `==`. TypeScript helps you by strongly typing your variables ensuring you will never unintentionally compare two variables of different types.
+\- [https://eslint.style/rules/default/semi](https://eslint.style/rules/default/semi)
+
+If you don't know about these pitfalls or don't pay enough attention this might catch you off-guard and leave you debugging for a while.
+
+#### Type coercion / weak comparison
+
+A lot of novice JavaScript developers aren't aware of the intrinsic types and coercions that happen when you use weak operators.
+Take for example `===` vs `==`.
+
+As a general note, you shouldn't compare variables of different types. That's as if you're comparing apples to oranges. If you need to compare two different types, you first need to _cast_ / transform one of either before comparing them.
+
+This can avoid nasty bugs when you accidentally use strings to store numerical values. You won't notice that one of them is a string and a weak comparison would just let it slip.
+
+```tsx
+var myAge = prompt("Enter your age");
+var years = 5;
+
+console.log(`In ${5} years you will be ${myAge + years}`);
+```
+
+This is obviously a very simplified issue, but if a string is hidden somewhere deep within your code / data, it might cause problems in calculations.
+
+TypeScript helps you by strongly typing your variables ensuring you will never unintentionally compare two variables of different types by checking types at compile time and highlighting the error in your IDE.
 
 _Hint: enabling the [eqeqeq](https://eslint.org/docs/latest/rules/eqeqeq) eslint rule which requires `===` also helps keeping this problem away._
 
