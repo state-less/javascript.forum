@@ -1,7 +1,3 @@
-This post is part of a series of posts which will be compiled into [A guide to become a professional JavaScript developer](http://localhost:5173/post-bc3b9f92-7f59-4675-9d72-166f41e4ffcf).
-
-While Git is absolutely independent of JavaScript, every aspiring JavaScript developer should learn Git before working on complex projects.
-
 # [Git](https://git-scm.com/)
 
 ## What is Git?
