@@ -16,7 +16,7 @@ The first thing you should learn about is how to use branches _effectively_. Thi
 
 ## Branching Model
 
-Normally you are working on _feature_<sup>1</sup> and _hotfix_ branches. Once development of a _feature_ meets its [_DoD_](https://www.scruminc.com/definition-of-done) it can be merged into the current _release_<sup>2</sup> branch. It makes sense to have _release_ branches which accumulate features and bug-fixes until the next version requirements are met<sup>3</sup>.
+Normally you are working on _feature_<sup>1</sup> and _hotfix_ branches. Once development of a _feature_ meets its [_DoD_](https://www.scrum.org/resources/what-definition-done) it can be merged into the current _release_<sup>2</sup> branch. It makes sense to have _release_ branches which accumulate features and bug-fixes until the next version requirements are met<sup>3</sup>.
 
 <sub>1 - Features represent an increment in value of a product and are usually self contained. It makes sense to have a seperate branch for each feature that's being developed as it contains all the changes that are needed for an increment in value.</sub>  
 <sub>2 -  When developing a product, you usually you have release cycles. A release is a collection of features that marks a finalized version of a product.</sub>  
