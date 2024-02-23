@@ -2,7 +2,7 @@
 
 ## What is Git?
 
-Git is a version control system which allows you to keep track of all the changes you make to a codebase / repository. It allows you to effectively collaborate and have multiple people work on the same codebase.  
+Git is a version control system which allows you to keep track of all the changes you make to a codebase / repository. It allows you to effectively collaborate and have multiple people work on the same codebase.
 
 It has a few concepts you should be aware of: _repositories_, _PRs_, _branches_ and _commits_.
 
@@ -12,23 +12,25 @@ I won't cover the very basics in this article because there's just so much detai
 
 However there are a few important things you need to know even when you're familiar with git. Especially if you're working with multiple people on the same project / feature.
 
-The first thing you should learn about is how to use _branches effectively_. This allows you to split work into features, fixes and releases which makes it easy to work on a seperate feature and keep release cycles once your project has grown in complexity.
+The first thing you should learn about is how to use branches _effectively_. This allows you to split work into features, fixes and releases which makes it easy to work on a seperate feature and keep release cycles once your project has grown in complexity.
 
 ## Branching Model
 
-Normally you are working on _feature_ and _hotfix_ branches. Features represent an increment in value of a product and are usually self contained. It makes sense to have a seperate branch for each feature that's being developed as it contains all the changes that are needed for an increment in value. Once development of a _feature_ meets its [_DoD_](https://www.scruminc.com/definition-of-done) it can be merged into the current _release_ branch.   
-When developing a product, you usually you have release cycles. A release is a collection of features that marks a finalized version of a product.  
-Hence it makes sense to have _release_ branches which accumulate features and bug-fixes until the version requirements are met. 
+Normally you are working on _feature_<sup>1</sup> and _hotfix_ branches. Once development of a _feature_ meets its [_DoD_](https://www.scruminc.com/definition-of-done) it can be merged into the current _release_<sup>2</sup> branch. It makes sense to have _release_ branches which accumulate features and bug-fixes until the next version requirements are met<sup>3</sup>.
 
-This means, all features meet their DoD, all tests run successfully. Linters and compilers don't produce errors and the pipeline is *green* (completes successfully)
+<sub>1 - Features represent an increment in value of a product and are usually self contained. It makes sense to have a seperate branch for each feature that's being developed as it contains all the changes that are needed for an increment in value.</sub>  
+<sub>2 -  When developing a product, you usually you have release cycles. A release is a collection of features that marks a finalized version of a product.</sub>  
+<sub>3 - This means, all features meet their DoD, all tests run successfully. QA and Design is approved. Linters and compilers don't produce errors and the pipeline is _green_ (completes successfully)</sub>
 
-Once a release branch has all features for the next version it should be finalized (_locked_). Once the branch is locked, you can merge it into _master_ and tag the commit with the version number.
+Once a release branch is ready and deployed to production, it should be finalized (_locked_). You can then merge it into _master_ and tag the commit with the correct version number.
 
-Here is an article by Atlassian which covers [different branching workflows](https://www.atlassian.com/git/tutorials/comparing-workflows) such as [_GitFlow_](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
+Here is an article by Atlassian which covers [different branching workflows](https://www.atlassian.com/git/tutorials/comparing-workflows) such as [_GitFlow_](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow).
 
-Once you are familiar with branching, features and release cycles you can try collaborating with others on a project. There are a few things worth to know when working with other people on the same feature branch.
+Once you are familiar with branching, features and release cycles you can try collaborating with others on a project.
 
-One of them is rebasing to upstream and preserving history when merging.
+### There are a few things worth to know when working with together on the same feature branch.
+
+Some of those are rebasing to upstream and preserving history when merging.
 
 ## What's the difference between `git rebase` and `git merge`?
 
@@ -40,9 +42,9 @@ Please refer to this [question](https://stackoverflow.com/questions/16666089/wha
 
 Both merging and rebasing are sometimes neccessary and it's quite easy to know which ones appropriate.
 
-It depends on the state of your local branch and the **direction** of changes you are _pulling_ / _pushing_.
+It depends on the state of your **local** branch and the *direction* of changes you are pulling / pushing.
 
-If someone else made changes to the same branch while you were working on your local branches, then you need to **rebase** the remote branch _before_ **merging** your commits into remote.
+If someone else made changes to the same branch while you were working on your local branches, then you need to **rebase** the remote branch before **merging** your commits into remote.
 
 Suppose you are working with multiple people on the same feature branch. While you are working on your local feature, someone else _merged_ / pushed his changes onto the remote feature branch. Now if you want to _merge_ **your** changes into the same remote branch, you first need to _pull_ the changes made to the upstream.
 
@@ -76,4 +78,4 @@ IMHO this should be standard and you should need to actively choose to fast forw
 
 I think these are some of the most important things to know about git and if you mastered all this, then using git will be a walk in the park.
 
-*Note: There's even more you can do in git like bisecting which is very useful and something every mid to senior developer should know how to use, but that will be covered in another post.*
+_Note: There's even more you can do in git like bisecting which is very useful and something every mid to senior developer should know how to use, but that will be covered in another post._
