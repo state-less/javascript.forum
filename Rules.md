@@ -1,5 +1,6 @@
 - Be polite
 - Give constructive criticism
+- No negativity
 - Posts must be related to programming
 - Main Topic is JavaScript / TypeScript
 - No low effort posts
