@@ -1,34 +1,30 @@
-# A Component-Driven Architecture on Node.js
-
 In the realm of backend development, [React Server](http://reactserver.dev) emerges as a transformative force, introducing the paradigm of component-driven programming. This innovative approach not only simplifies code structuring but also enhances scalability and maintainability. Let's explore the key benefits that make React Server or rather component-driven backend development a game-changer.
 
 # Backend Components
+
 ## Declarative Microservices with Server-Side Components
 
 At the heart of React Server is the concept of server-side components. These components serve as declarative abstractions for entire microservices. Instead of traditional backend structures, you can encapsulate functionalities like authentication, database access, or complex business logic within a single server-side component.
 
 ```tsx
 const Forum = (props) => {
-    const { key } = props;
+  const { key } = props;
 
-    // Handle authentication, database queries and states
+  // Handle authentication, database queries and states
 
-    // Retrieve posts 
-    const [posts] = useQuery({
-        key: 'post',
-        scope: key
-    });
-    
-    const createPost = (post) => {
-        // Create a new post
-    }
+  // Retrieve posts
+  const [posts] = useQuery({
+    key: "post",
+    scope: key,
+  });
 
-    // Pass props to the client
-    return <ServerSideProps 
-        posts={posts}
-        createPost={createPost}
-    />
-}
+  const createPost = (post) => {
+    // Create a new post
+  };
+
+  // Pass props to the client
+  return <ServerSideProps posts={posts} createPost={createPost} />;
+};
 ```
 
 ## Streamlined Scalability through Abstraction
@@ -37,19 +33,19 @@ The true power of component-driven programming shines when your application evol
 
 ```tsx
 const Forums = (props) => {
-    const { forums } = props;
-    return forums.map((forum) => {
-        return <Forum key={forum} />
-    })
-}
+  const { forums } = props;
+  return forums.map((forum) => {
+    return <Forum key={forum} />;
+  });
+};
 // This is all it needs to render multiple forums
-<Forums 
-    forums={['java', 'python', 'javascript']}
-/>
+<Forums forums={["java", "python", "javascript"]} />;
 ```
+
 As you see it's only a few lines of code to scale your platform from hosting one forum to hosting multiple forums.
 
 ## Seamless Refactoring
+
 An atomic and composable nature ensures that modifications are localized and predictable, reducing the chances of unintended side effects. Each component encapsulates its logic and state, making it a self-contained entity. When a change is required, developers can focus on specific components without worrying about intricate dependencies.
 
 ## Clean Code through Component-Driven Development: A Computer Science Perspective
@@ -69,20 +65,20 @@ Composability, a key aspect of component-driven development, is synonymous with 
 Declarative components, designed with composability in mind, encourage the creation of modular, reusable building blocks. These building blocks, when combined, form a coherent and scalable system. This aligns with the philosophy of clean code, where the reuse of well-designed components results in systems that are not only efficient but also resilient to change.
 
 ### Declarative Structures and Readability
+
 In Martin's "Clean Code," readability is emphasized as a crucial aspect of clean code. Declarative structures, by providing a clear and concise representation of the system's logic, enhance code readability.
 
 Code expressing "what" instead of "how" is inherently more readable and maintainable. The use of declarative components aligns with this paradigm, contributing to code that is not only clean but also comprehensible to developers across the team.
 
 ## React Server
+
 ### TypeScript/TSX for Code Clarity and Maintainability
 
 React Server embraces TypeScript/TSX for server-side logic definition. This not only enhances code clarity but also promotes the creation of modular and reusable components. The familiar syntax of React components carries over to the server, providing a unified and intuitive development experience.
 
-
 ### Bridging the Server-Client Divide
 
 React Server excels in erasing the boundaries between server and client. Server-side components execute on both ends, enabling real-time updates and reactive coding styles. The use of the `<ServerSideProps />` component facilitates data transmission to the client, where it can be consumed with the `useComponent` hook.
-
 
 ### Embrace the Future of Backend Development with React Server
 
